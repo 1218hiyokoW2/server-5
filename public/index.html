@@ -42,13 +42,25 @@
         },
 
         // POSTリクエスト
-        async postData() {},
+        async postData() {
+          const res = await fetch('/api', { method: 'POST' });
+          const data = await res.json();
+          this.data = JSON.stringify(data, null, 2);
+        },
 
         // PUTリクエスト
-        async putData() {},
+        async putData() {
+          const res = await fetch('/api', { method: 'PUT' });
+          const data = await res.json();
+          this.data = JSON.stringify(data, null, 2);
+        },
 
         // DELETEリクエスト
-        async deleteData() {}
+        async deleteData() {
+          const res = await fetch('/api', { method: 'DELETE' });
+          const data = await res.json();
+          this.data = JSON.stringify(data, null, 2);
+        }
       };
     }
   </script>
