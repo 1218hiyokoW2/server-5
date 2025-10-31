@@ -34,12 +34,28 @@
         name: '',
         rank: '',
 
-        // GETリクエスト
+        // GETリクエスト （クエリーパラメーター）
         async getData() {
-          const res = await fetch('/api');
+          const query = new URLSearchParams({
+            name: this.name,
+            rank: this.rank
+          });
+          const res = await fetch(`/api?${query}`);
           const data = await res.json();
           this.data = JSON.stringify(data, null, 2);
         },
+
+        // // GETリクエスト（パスパラメーター）
+        // async getData() {
+        //   // パラメーターを分割代入で受け取る
+        //   const { name, rank } = getParams();
+
+        //   // URLのパスの中に組み込む
+        //   const res = await fetch(`/api/${name}/${rank}`);
+        //   const data = await res.json();
+
+        //   result.textContent = JSON.stringify(data, null, 2);
+        // },
 
         // POSTリクエスト
         async postData() {

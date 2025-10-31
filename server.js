@@ -4,10 +4,23 @@ const app = new Hono();
 
 app.use('/*', serveStatic({ root: './public' }));
 
-// GETリクエストに対する処理
+// GETリクエストに対する処理（クエリーパラメーター）
 app.get('/api', async (c) => {
-  return c.json({ message: 'GET' });
+  // パラメーターの受け取り
+  const name = c.req.query('name');
+  const rank = c.req.query('rank');
+
+  return c.json({ message: 'GET', query: { name, rank } });
 });
+
+// // GETリクエストに対する処理（パスパラメーター）
+// app.get('/api/:name/:rank', (c) => {
+//   // パラメーターの受け取り
+//   const name = c.req.param('name');
+//   const rank = c.req.param('rank');
+
+//   return c.json({ message: 'GET', param: { name, rank } });
+// });
 
 // POSTリクエストに対する処理
 app.post('/api', async (c) => {
